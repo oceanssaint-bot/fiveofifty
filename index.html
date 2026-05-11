@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FiveOFifty Studios — Brand Identity Presentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --orange:#FF5C00;
+  --g900:#111111;
+  --g800:#1A1A1A;
+  --g700:#2A2A2A;
+  --g600:#333333;
+  --g500:#555555;
+  --g400:#888888;
+  --g300:#AAAAAA;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Montserrat',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+html,body{height:100%}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--fb);
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* NAV */
+nav{
+  padding:0 56px;
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--g700);
+  flex-shrink:0;
+  position:relative;
+  z-index:10;
+}
+.nav-logo{font-family:var(--fd);font-size:24px;letter-spacing:4px}
+.nav-logo span{color:var(--orange)}
+.nav-meta{font-family:var(--fm);font-size:10px;letter-spacing:3px;color:var(--g500);text-transform:uppercase}
+
+/* DOORS CONTAINER */
+.doors{
+  flex:1;
+  display:flex;
+  min-height:calc(100vh - 68px);
+}
+
+/* INDIVIDUAL DOOR */
+.door{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:var(--white);
+  padding:72px 56px;
+  position:relative;
+  transition:background .35s, border-color .35s;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+/* Radial glow — hidden until hover */
+.door::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 50% 42%,rgba(255,92,0,0.07) 0%,transparent 65%);
+  opacity:0;
+  transition:opacity .5s;
+  pointer-events:none;
+}
+
+/* Orange accent bar on hover — bottom edge */
+.door::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:10%;
+  right:10%;
+  height:2px;
+  background:var(--orange);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+
+.door:hover{background:rgba(255,92,0,0.025)}
+.door:hover::before{opacity:1}
+.door:hover::after{transform:scaleX(1)}
+
+/* Corner accents — appear on hover */
+.door-corner{
+  position:absolute;
+  width:22px;
+  height:22px;
+  opacity:0;
+  transition:opacity .3s;
+}
+.door-corner.tl{top:28px;left:28px;border-top:1.5px solid var(--orange);border-left:1.5px solid var(--orange)}
+.door-corner.tr{top:28px;right:28px;border-top:1.5px solid var(--orange);border-right:1.5px solid var(--orange)}
+.door-corner.bl{bottom:28px;left:28px;border-bottom:1.5px solid var(--orange);border-left:1.5px solid var(--orange)}
+.door-corner.br{bottom:28px;right:28px;border-bottom:1.5px solid var(--orange);border-right:1.5px solid var(--orange)}
+.door:hover .door-corner{opacity:1}
+
+/* Door content */
+.door-tag{
+  font-family:var(--fm);
+  font-size:10px;
+  letter-spacing:3px;
+  color:var(--orange);
+  text-transform:uppercase;
+  margin-bottom:40px;
+  opacity:.55;
+  transition:opacity .3s;
+}
+.door:hover .door-tag{opacity:1}
+
+.door-preview{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:52px;
+  transition:filter .4s;
+}
+.door:hover .door-preview{filter:drop-shadow(0 0 32px rgba(255,92,0,0.15))}
+
+/* Monolith logo: portrait oval */
+.preview-monolith{height:210px;width:auto;display:block}
+
+/* Mark logo: wide horizontal */
+.preview-mark{max-width:340px;max-height:84px;width:100%;object-fit:contain;display:block}
+
+.door-title{
+  font-family:var(--fd);
+  font-size:clamp(38px,4vw,68px);
+  letter-spacing:7px;
+  line-height:1;
+  text-align:center;
+  margin-bottom:6px;
+}
+.door-subtitle{
+  font-family:var(--fm);
+  font-size:10px;
+  letter-spacing:4px;
+  color:var(--orange);
+  text-transform:uppercase;
+  text-align:center;
+  margin-bottom:22px;
+  opacity:.6;
+}
+.door-desc{
+  font-size:12.5px;
+  color:var(--g400);
+  line-height:1.9;
+  max-width:300px;
+  text-align:center;
+  margin-bottom:48px;
+  font-weight:400;
+}
+.door-cta{
+  font-family:var(--fm);
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  opacity:.35;
+  transition:opacity .3s, gap .25s;
+}
+.door-cta-arrow{transition:transform .25s}
+.door:hover .door-cta{opacity:1}
+.door:hover .door-cta-arrow{transform:translateX(6px)}
+
+/* Large ghost number */
+.door-num{
+  position:absolute;
+  bottom:40px;
+  right:44px;
+  font-family:var(--fd);
+  font-size:160px;
+  color:rgba(255,255,255,0.018);
+  line-height:1;
+  pointer-events:none;
+  user-select:none;
+  transition:color .35s;
+}
+.door:hover .door-num{color:rgba(255,92,0,0.045)}
+
+/* DIVIDER between doors */
+.door-divider{
+  width:1px;
+  background:var(--g700);
+  flex-shrink:0;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:2;
+}
+.door-or{
+  font-family:var(--fd);
+  font-size:13px;
+  letter-spacing:5px;
+  color:var(--g600);
+  background:var(--black);
+  padding:14px 0;
+  position:absolute;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  user-select:none;
+}
+
+/* FOOTER */
+footer{
+  padding:18px 56px;
+  border-top:1px solid var(--g700);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-shrink:0;
+}
+.ft-copy{font-family:var(--fm);font-size:9px;color:var(--g600);letter-spacing:2px}
+.ft-v{font-family:var(--fm);font-size:9px;color:var(--g700);letter-spacing:2px}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.door:first-child{animation:fadeIn .65s ease .08s both}
+.door:last-child{animation:fadeIn .65s ease .2s both}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">F<span>0</span>FS</div>
+  <div class="nav-meta">Brand Identity — Select an Option</div>
+</nav>
+
+<!-- DOORS -->
+<div class="doors">
+
+  <!-- DOOR 1: THE MONOLITH -->
+  <a href="monolith.html" class="door">
+    <div class="door-corner tl"></div>
+    <div class="door-corner tr"></div>
+    <div class="door-corner bl"></div>
+    <div class="door-corner br"></div>
+    <div class="door-num">I</div>
+
+    <div class="door-tag">Identity Option 01</div>
+
+    <div class="door-preview">
+      <img src="images/1.png" alt="The Monolith — FiveOFifty Studios Oval Seal" class="preview-monolith">
+    </div>
+
+    <div class="door-title">THE MONOLITH</div>
+    <div class="door-subtitle">Oval Seal System</div>
+    <p class="door-desc">Heritage craft meets cinematic authority. An interlocked monogram enclosed in a precision oval seal with circular studio name — built to command.</p>
+
+    <div class="door-cta">
+      View Guidelines
+      <span class="door-cta-arrow">→</span>
+    </div>
+  </a>
+
+  <!-- DIVIDER -->
+  <div class="door-divider">
+    <div class="door-or">OR</div>
+  </div>
+
+  <!-- DOOR 2: THE MARK -->
+  <a href="mark.html" class="door">
+    <div class="door-corner tl"></div>
+    <div class="door-corner tr"></div>
+    <div class="door-corner bl"></div>
+    <div class="door-corner br"></div>
+    <div class="door-num">II</div>
+
+    <div class="door-tag">Identity Option 02</div>
+
+    <div class="door-preview">
+      <img src="images/2.png" alt="The Mark — FiveOFifty Studios Wordmark" class="preview-mark">
+    </div>
+
+    <div class="door-title">THE MARK</div>
+    <div class="door-subtitle">F-Form Wordmark System</div>
+    <p class="door-desc">Bold, geometric, built for scale. A direct F-form wordmark system designed light by default — four configurations, three colour applications, zero compromise.</p>
+
+    <div class="door-cta">
+      View Guidelines
+      <span class="door-cta-arrow">→</span>
+    </div>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-copy">© 2025 FiveOFifty Studios — Confidential Brand Presentation</div>
+  <div class="ft-v">v1.0</div>
+</footer>
+
+</body>
+</html>

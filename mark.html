@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FiveOFifty Studios — The Mark — Brand Guidelines v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --orange:#FF5C00;
+  --orange2:#FF7A29;
+  --g900:#111111;
+  --g800:#1A1A1A;
+  --g700:#2A2A2A;
+  --g600:#333333;
+  --g500:#555555;
+  --g400:#888888;
+  --g300:#AAAAAA;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Montserrat',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--fb);font-size:15px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,92,0,0.15);padding:0 56px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:var(--fd);font-size:20px;letter-spacing:3px}
+.nav-logo span{color:var(--orange)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--g400);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--orange)}
+.nav-home{color:var(--g600) !important}
+.nav-alt{color:var(--orange) !important;opacity:.6}
+.nav-alt:hover{opacity:1 !important}
+
+/* LAYOUT */
+section{padding:96px 56px;border-bottom:1px solid var(--g700);position:relative}
+.sec-label{font-family:var(--fm);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.sec-title{font-family:var(--fd);font-size:clamp(44px,6vw,76px);letter-spacing:4px;line-height:1;margin-bottom:36px}
+.desc{font-size:14px;color:var(--g300);line-height:1.85;max-width:620px}
+.pg{position:absolute;bottom:22px;right:56px;font-family:var(--fm);font-size:10px;color:var(--g600);letter-spacing:2px}
+.tag{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--orange)}
+.obar{width:2px;height:72px;background:var(--orange);margin-bottom:36px}
+
+/* COVER */
+#cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.c-bg{position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:var(--fd);font-size:30vw;color:rgba(255,255,255,0.012);line-height:1;pointer-events:none;user-select:none}
+.c-hl{font-family:var(--fd);font-size:clamp(60px,10vw,132px);letter-spacing:8px;line-height:.88}
+.c-hl .o{color:var(--orange)}
+.c-sub{font-family:var(--fd);font-size:clamp(18px,3vw,36px);letter-spacing:18px;color:var(--g500);margin-bottom:60px}
+.c-meta{display:flex;gap:44px;align-items:center}
+.mi .lbl{font-family:var(--fm);font-size:9px;letter-spacing:2px;color:var(--g500);text-transform:uppercase;margin-bottom:3px}
+.mi .val{font-size:12px;font-weight:500;color:#F0F0F0;letter-spacing:.5px}
+.mdiv{width:1px;height:32px;background:var(--g700)}
+
+/* LOGO GRID */
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px}
+.logo-cell{padding:72px 48px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;min-height:380px}
+.lc-blk{background:var(--black);border:1px solid var(--g700)}
+.lc-drk{background:var(--g900);border:1px solid var(--g700)}
+.lc-org{background:var(--orange)}
+.lc-tex{background:var(--g800);border:1px solid var(--g700);background-image:repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(255,255,255,0.012) 3px,rgba(255,255,255,0.012) 6px)}
+.clbl{position:absolute;bottom:16px;left:22px;font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.35}
+
+/* COLORS */
+.color-row{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--g700);overflow:hidden;border-radius:2px;margin-bottom:40px}
+.sw-block{height:180px}
+.sw-info{padding:18px 14px;background:var(--g800);border-top:1px solid var(--g700)}
+.sw-name{font-family:var(--fd);font-size:17px;letter-spacing:2px;margin-bottom:2px}
+.sw-hex{font-family:var(--fm);font-size:11px;color:var(--g300)}
+.sw-role{font-size:10px;color:var(--g500);margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+
+/* TYPE */
+.tb{border:1px solid var(--g700);margin-bottom:2px;overflow:hidden}
+.tb-head{background:var(--g900);padding:10px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--g700)}
+.tb-body{padding:28px 22px}
+
+/* ENV */
+.env-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:48px}
+.env-cell{position:relative;min-height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.elbl{position:absolute;top:14px;left:18px;font-family:var(--fm);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g500)}
+
+/* DON'T */
+.dont-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:40px}
+.dont-cell{border:1px solid var(--g700);overflow:hidden}
+.dont-head{padding:9px 14px;background:rgba(255,40,40,0.07);border-bottom:1px solid rgba(255,40,40,0.15);display:flex;align-items:center;gap:7px}
+.dont-x{width:15px;height:15px;background:#FF2828;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:white;flex-shrink:0}
+.dont-r{font-family:var(--fm);font-size:9px;letter-spacing:1px;color:rgba(255,90,90,.85)}
+.dont-vis{height:120px;display:flex;align-items:center;justify-content:center;padding:12px;background:var(--g900)}
+
+/* UTILS */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px}
+.card{border:1px solid var(--g700);padding:24px}
+.biz{width:272px;height:152px;background:var(--black);border:0.5px solid var(--g600);border-radius:6px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+
+/* Vimeo */
+.vimeo-wrap{position:relative;width:100%;padding-top:56.25%;border:1px solid var(--g700);overflow:hidden;margin-bottom:32px;background:var(--g900)}
+.vimeo-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+
+/* Logo 2 sizing utility classes */
+.lm-showcase-h    {max-width:380px;max-height:90px;width:100%;object-fit:contain;display:block}
+.lm-showcase-icon {max-height:200px;max-width:200px;width:auto;display:block}
+.lm-showcase-tall {max-height:210px;max-width:220px;width:auto;display:block}
+.lm-clearspace-h  {max-width:320px;max-height:80px;width:100%;object-fit:contain;display:block}
+.lm-clearspace-icon{height:120px;width:auto;display:block}
+.lm-variant       {max-width:360px;max-height:130px;width:100%;object-fit:contain;display:block}
+.lm-env-h         {max-width:260px;max-height:58px;width:100%;object-fit:contain;display:block;flex-shrink:0}
+.lm-env-icon      {height:44px;width:auto;display:block;flex-shrink:0}
+.lm-env-tall      {max-height:110px;width:auto;display:block;object-fit:contain}
+.lm-env-xs        {height:18px;width:auto;display:block}
+.lm-avatar        {height:40px;width:auto;display:block}
+.lm-email-icon    {height:38px;width:auto;flex-shrink:0;display:block}
+.lm-dont          {max-width:180px;max-height:44px;width:100%;object-fit:contain;display:block}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.obar{animation:fadeUp .7s ease forwards}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">F<span>0</span>FS</div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-home">← Home</a></li>
+    <li><a href="#mark">Mark</a></li>
+    <li><a href="#clearspace">Clear Space</a></li>
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#env">Environments</a></li>
+    <li><a href="#rules">Rules</a></li>
+    <li><a href="#motion">Motion</a></li>
+    <li><a href="monolith.html" class="nav-alt">The Monolith →</a></li>
+  </ul>
+</nav>
+
+<!-- ── COVER ── -->
+<section id="cover">
+  <div class="c-bg">FM</div>
+  <div class="obar"></div>
+  <div style="font-family:var(--fm);font-size:10px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:22px">Brand Identity Guidelines — 2025</div>
+  <div class="c-hl">FIVE<span class="o">O</span></div>
+  <div class="c-hl">FIFTY</div>
+  <div style="height:14px"></div>
+  <div class="c-sub">THE MARK</div>
+  <div class="c-meta">
+    <div class="mi"><div class="lbl">Identity</div><div class="val">The Mark — Approved</div></div>
+    <div class="mdiv"></div>
+    <div class="mi"><div class="lbl">Version</div><div class="val">1.0</div></div>
+    <div class="mdiv"></div>
+    <div class="mi"><div class="lbl">Default</div><div class="val">Light on Dark</div></div>
+    <div class="mdiv"></div>
+    <div class="mi"><div class="lbl">Status</div><div class="val" style="color:var(--orange)">Client Approved ✓</div></div>
+  </div>
+  <div class="pg">01 — COVER</div>
+</section>
+
+<!-- ── MARK ── -->
+<section id="mark">
+  <div class="sec-label">01 — Brand Mark</div>
+  <div class="sec-title">THE MARK</div>
+  <p class="desc" style="margin-bottom:52px">The FiveOFifty Studios mark is a bold F-form wordmark system — geometric, direct, built for scale. Designed light by default. Four configurations are approved across three colour applications.</p>
+
+  <div class="logo-grid">
+
+    <!-- PRIMARY: Horizontal on Black -->
+    <div class="logo-cell lc-blk" style="min-height:320px">
+      <img src="images/2.png" alt="FiveOFifty Studios Mark — Horizontal" class="lm-showcase-h">
+      <div class="clbl" style="color:var(--g500)">Primary — Horizontal Lockup</div>
+    </div>
+
+    <!-- ICON: App Mark on Dark -->
+    <div class="logo-cell lc-drk" style="min-height:320px">
+      <img src="images/2.1.png" alt="FiveOFifty Studios Icon Mark" class="lm-showcase-icon">
+      <div class="clbl" style="color:var(--g500)">Icon — App / Avatar / Stamp</div>
+    </div>
+
+    <!-- STACKED: Vertical on Black -->
+    <div class="logo-cell lc-blk" style="min-height:320px">
+      <img src="images/2.3.png" alt="FiveOFifty Studios Stacked Lockup" class="lm-showcase-tall">
+      <div class="clbl" style="color:var(--g500)">Stacked — Vertical Lockup</div>
+    </div>
+
+    <!-- HERO: Orange -->
+    <div class="logo-cell lc-org" style="min-height:320px">
+      <img src="images/2.png" alt="FiveOFifty Studios Mark — Orange" class="lm-showcase-h">
+      <div class="clbl" style="color:rgba(255,255,255,.45)">Hero — On Orange</div>
+    </div>
+
+  </div>
+
+  <!-- EXTENDED VARIANTS: 2.4 + 2.5 -->
+  <div class="two" style="margin-top:2px">
+    <div class="logo-cell lc-drk" style="min-height:260px;border:1px solid var(--g700)">
+      <img src="images/2.4.png" alt="FiveOFifty Studios Mark Variant 4" class="lm-variant">
+      <div class="clbl" style="color:var(--g500)">Variant D — Extended</div>
+    </div>
+    <div class="logo-cell lc-tex" style="min-height:260px">
+      <img src="images/2.5.png" alt="FiveOFifty Studios Mark Variant 5" class="lm-variant">
+      <div class="clbl" style="color:var(--g500)">Variant E — Extended</div>
+    </div>
+  </div>
+
+  <div class="pg">02 — MARK</div>
+</section>
+
+<!-- ── CLEAR SPACE ── -->
+<section id="clearspace">
+  <div class="sec-label">02 — Construction</div>
+  <div class="sec-title">CLEAR SPACE</div>
+  <p class="desc" style="margin-bottom:40px">Maintain minimum clear space equal to the cap-height of the wordmark (X) on all sides. Never clip the icon or truncate the wordmark.</p>
+
+  <!-- Horizontal lockup clear space demo -->
+  <div style="background:var(--g900);border:1px solid var(--g700);padding:64px;display:flex;align-items:center;justify-content:center;margin-bottom:2px">
+    <div style="position:relative;padding:36px 48px;border:1px dashed rgba(255,92,0,.4)">
+      <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <div style="position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <div style="position:absolute;left:-10px;top:50%;transform:translateY(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <div style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <img src="images/2.png" alt="FiveOFifty Studios Mark" class="lm-clearspace-h">
+    </div>
+  </div>
+
+  <!-- Icon clear space demo -->
+  <div style="background:var(--g800);border:1px solid var(--g700);padding:64px;display:flex;align-items:center;justify-content:center;margin-bottom:32px">
+    <div style="position:relative;padding:28px;border:1px dashed rgba(255,92,0,.4)">
+      <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <div style="position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <div style="position:absolute;left:-10px;top:50%;transform:translateY(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <div style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:var(--fm);font-size:9px;color:var(--orange);letter-spacing:2px">X</div>
+      <img src="images/2.1.png" alt="FiveOFifty Studios Icon" class="lm-clearspace-icon">
+    </div>
+  </div>
+
+  <div class="three">
+    <div class="card"><div class="tag" style="display:block;margin-bottom:10px">Min Size — Horizontal</div><div style="font-family:var(--fd);font-size:28px;letter-spacing:2px;margin-bottom:6px">200px</div><p style="font-size:12px;color:var(--g500);line-height:1.7">Minimum width for the horizontal lockup. Wordmark must remain fully legible.</p></div>
+    <div class="card"><div class="tag" style="display:block;margin-bottom:10px">Clear Space Unit</div><div style="font-family:var(--fd);font-size:28px;letter-spacing:2px;margin-bottom:6px">X = Cap H</div><p style="font-size:12px;color:var(--g500);line-height:1.7">Equal breathing room on all sides, measured from the outermost edge of the mark.</p></div>
+    <div class="card"><div class="tag" style="display:block;margin-bottom:10px">Min Size — Icon</div><div style="font-family:var(--fd);font-size:28px;letter-spacing:2px;margin-bottom:6px">32px</div><p style="font-size:12px;color:var(--g500);line-height:1.7">Standalone icon mark. Use for favicons, app icons, and small avatar contexts.</p></div>
+  </div>
+  <div class="pg">03 — CONSTRUCTION</div>
+</section>
+
+<!-- ── COLORS ── -->
+<section id="colors">
+  <div class="sec-label">03 — Color System</div>
+  <div class="sec-title">PALETTE</div>
+  <p class="desc" style="margin-bottom:40px">The same strict tricolor system as The Monolith. The mark reads light — white on black is the canonical application. Orange is the hero accent.</p>
+  <div class="color-row">
+    <div>
+      <div class="sw-block" style="background:#0A0A0A;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.016) 0,rgba(255,255,255,0.016) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(255,255,255,0.016) 0,rgba(255,255,255,0.016) 1px,transparent 1px,transparent 40px)"></div></div>
+      <div class="sw-info"><div class="sw-name">Black</div><div class="sw-hex">#0A0A0A</div><div class="sw-role">Primary Background</div></div>
+    </div>
+    <div>
+      <div class="sw-block" style="background:#111111"></div>
+      <div class="sw-info"><div class="sw-name">Studio</div><div class="sw-hex">#111111</div><div class="sw-role">Surface / Card</div></div>
+    </div>
+    <div>
+      <div class="sw-block" style="background:#FFFFFF"></div>
+      <div class="sw-info"><div class="sw-name" style="color:#fff">White</div><div class="sw-hex">#FFFFFF</div><div class="sw-role">Mark / Type — Default</div></div>
+    </div>
+    <div>
+      <div class="sw-block" style="background:#FF5C00;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,0,0,0.04) 0,rgba(0,0,0,0.04) 1px,transparent 0,transparent 50%);background-size:8px 8px"></div></div>
+      <div class="sw-info"><div class="sw-name">Orange</div><div class="sw-hex">#FF5C00</div><div class="sw-role">Brand Accent</div></div>
+    </div>
+    <div>
+      <div class="sw-block" style="background:#FF7A29"></div>
+      <div class="sw-info"><div class="sw-name">Ember</div><div class="sw-hex">#FF7A29</div><div class="sw-role">Hover / Active</div></div>
+    </div>
+  </div>
+  <div class="two">
+    <div style="background:var(--g900);border:1px solid var(--g700);padding:28px">
+      <div class="tag" style="display:block;margin-bottom:18px">Mark Colour Applications</div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:48px;height:32px;background:var(--black);border:1px solid var(--g600);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+            <div style="width:20px;height:12px;background:white;border-radius:1px"></div>
+          </div>
+          <div><div style="font-size:12px;font-weight:600;margin-bottom:2px">White on Black</div><div style="font-size:11px;color:var(--g500)">Primary — default application</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:48px;height:32px;background:var(--orange);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+            <div style="width:20px;height:12px;background:white;border-radius:1px"></div>
+          </div>
+          <div><div style="font-size:12px;font-weight:600;margin-bottom:2px">White on Orange</div><div style="font-size:11px;color:var(--g500)">Hero moments, launch, CTAs</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:48px;height:32px;background:var(--g700);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+            <div style="width:20px;height:12px;background:white;border-radius:1px;opacity:.3"></div>
+          </div>
+          <div><div style="font-size:12px;font-weight:600;margin-bottom:2px;color:var(--g500)">Never: light backgrounds</div><div style="font-size:11px;color:var(--g600)">Mark is light — do not use on white</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--g900);border:1px solid var(--g700);padding:28px">
+      <div class="tag" style="display:block;margin-bottom:18px">Usage Ratios</div>
+      <div style="margin-bottom:13px"><div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-bottom:5px;letter-spacing:1px">BLACK — 75%</div><div style="height:9px;background:var(--black);border:1px solid var(--g600);width:75%"></div></div>
+      <div style="margin-bottom:13px"><div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-bottom:5px;letter-spacing:1px">WHITE (MARK) — 20%</div><div style="height:9px;background:white;width:20%"></div></div>
+      <div><div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-bottom:5px;letter-spacing:1px">ORANGE — 5%</div><div style="height:9px;background:var(--orange);width:5%"></div></div>
+    </div>
+  </div>
+  <div class="pg">04 — COLOR</div>
+</section>
+
+<!-- ── TYPE ── -->
+<section id="type">
+  <div class="sec-label">04 — Typography</div>
+  <div class="sec-title">TYPE SYSTEM</div>
+  <p class="desc" style="margin-bottom:40px">Bebas Neue commands all headlines. Montserrat handles body and UI. DM Mono for technical labels. The wordmark's own letterforms are proprietary — never substitute.</p>
+  <div class="tb">
+    <div class="tb-head"><span class="tag">Display — Bebas Neue</span><span style="font-family:var(--fm);font-size:10px;color:var(--g500)">Headlines / Titles / Section Labels</span></div>
+    <div class="tb-body">
+      <div style="font-family:var(--fd);font-size:68px;letter-spacing:6px;line-height:.9;margin-bottom:28px">FIVEOFIFTY<br>STUDIOS</div>
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end">
+        <div><div style="font-family:var(--fd);font-size:44px;letter-spacing:4px">Aa Bb Cc</div><div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-top:3px">44PX DISPLAY</div></div>
+        <div><div style="font-family:var(--fd);font-size:28px;letter-spacing:3px">Section Title</div><div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-top:3px">28PX HEADING</div></div>
+        <div><div style="font-family:var(--fd);font-size:18px;letter-spacing:5px;color:var(--orange)">LABEL / TAG</div><div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-top:3px">18PX LABEL</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tb">
+    <div class="tb-head"><span class="tag">Body — Montserrat</span><span style="font-family:var(--fm);font-size:10px;color:var(--g500)">Body Copy / Subheadings / UI</span></div>
+    <div class="tb-body">
+      <div style="font-family:var(--fb);font-size:26px;font-weight:700;letter-spacing:1px;margin-bottom:10px">Bold Subheading — Weight 700</div>
+      <div style="font-family:var(--fb);font-size:15px;color:var(--g300);line-height:1.85;max-width:580px;margin-bottom:16px">Regular weight body copy. FiveOFifty Studios produces cinematic content with craft and purpose — clear and legible at every size.</div>
+      <div style="display:flex;gap:28px;flex-wrap:wrap">
+        <span style="font-family:var(--fb);font-size:11px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:var(--g400)">LIGHT CAPTION</span>
+        <span style="font-family:var(--fb);font-size:11px;font-weight:600">Semibold Emphasis</span>
+        <span style="font-family:var(--fb);font-size:11px;color:var(--orange)">Orange CTA / Link</span>
+      </div>
+    </div>
+  </div>
+  <div class="tb">
+    <div class="tb-head"><span class="tag">Technical — DM Mono</span><span style="font-family:var(--fm);font-size:10px;color:var(--g500)">Labels / Codes / Metadata</span></div>
+    <div class="tb-body">
+      <div style="font-family:var(--fm);font-size:18px;color:var(--orange);letter-spacing:3px;margin-bottom:12px">01 — SECTION LABEL</div>
+      <div style="font-family:var(--fm);font-size:12px;color:var(--g400);line-height:1.9">#FF5C00 · FIVEOFIFTY.STUDIOS · VERSION 1.0 · THE MARK · 2025</div>
+    </div>
+  </div>
+  <div class="pg">05 — TYPOGRAPHY</div>
+</section>
+
+<!-- ── ENVIRONMENTS ── -->
+<section id="env">
+  <div class="sec-label">05 — Application</div>
+  <div class="sec-title">ENVIRONMENTS</div>
+  <p class="desc" style="margin-bottom:48px">The mark performing across every production touchpoint — always on dark or branded surfaces.</p>
+  <div class="env-grid">
+
+    <!-- Billboard -->
+    <div class="env-cell" style="background:var(--g900);border:1px solid var(--g700);min-height:340px">
+      <div class="elbl">Outdoor / Billboard</div>
+      <div style="width:82%;background:var(--black);border:2px solid var(--g600);padding:28px 36px;display:flex;align-items:center;gap:20px;position:relative;box-shadow:0 10px 48px rgba(0,0,0,.9)">
+        <div style="position:absolute;top:-10px;left:14px;right:14px;height:3px;background:var(--g600);border-radius:1px"></div>
+        <div style="position:absolute;bottom:-14px;left:43%;width:2px;height:14px;background:var(--g600)"></div>
+        <div style="position:absolute;bottom:-14px;right:43%;width:2px;height:14px;background:var(--g600)"></div>
+        <img src="images/2.png" alt="" class="lm-env-h">
+      </div>
+    </div>
+
+    <!-- Business card -->
+    <div class="env-cell" style="background:var(--g800);border:1px solid var(--g700);flex-direction:column;gap:14px">
+      <div class="elbl">Business Card — Front / Back</div>
+      <div class="biz" style="box-shadow:0 12px 48px rgba(0,0,0,.8),0 0 0 0.5px rgba(255,92,0,.18)">
+        <div style="display:flex;align-items:center;gap:14px">
+          <img src="images/2.1.png" alt="" class="lm-env-icon">
+          <div>
+            <div style="font-family:var(--fd);font-size:13px;letter-spacing:2px">FIVEOFIFTY STUDIOS</div>
+            <div style="font-family:var(--fb);font-size:8px;font-weight:300;letter-spacing:2px;color:var(--orange);margin-top:1px">CREATIVE PRODUCTION</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--fb);font-size:11px;font-weight:600">Director Name</div>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--g400);margin-top:2px">name@fiveofifty.studio</div>
+        </div>
+      </div>
+      <div style="width:272px;height:152px;background:var(--orange);border-radius:6px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(255,92,0,.2)">
+        <img src="images/2.3.png" alt="" class="lm-env-tall">
+      </div>
+    </div>
+
+    <!-- Video watermark -->
+    <div class="env-cell" style="background:var(--g800);border:1px solid var(--g700)">
+      <div class="elbl">Film / Video Watermark</div>
+      <div style="width:88%;aspect-ratio:16/9;background:#0c0c0c;position:relative;overflow:hidden;border:1px solid #222">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 35% 55%,rgba(55,55,55,.5),transparent 60%)"></div>
+        <div style="position:absolute;top:8px;left:8px;width:13px;height:13px;border-top:1.5px solid rgba(255,255,255,.2);border-left:1.5px solid rgba(255,255,255,.2)"></div>
+        <div style="position:absolute;top:8px;right:8px;width:13px;height:13px;border-top:1.5px solid rgba(255,255,255,.2);border-right:1.5px solid rgba(255,255,255,.2)"></div>
+        <div style="position:absolute;bottom:8px;left:8px;width:13px;height:13px;border-bottom:1.5px solid rgba(255,255,255,.2);border-left:1.5px solid rgba(255,255,255,.2)"></div>
+        <div style="position:absolute;bottom:8px;right:8px;width:13px;height:13px;border-bottom:1.5px solid rgba(255,255,255,.2);border-right:1.5px solid rgba(255,255,255,.2)"></div>
+        <div style="position:absolute;bottom:10px;right:12px;display:flex;align-items:center;gap:6px;opacity:.4">
+          <img src="images/2.1.png" alt="" class="lm-env-xs">
+          <span style="font-family:var(--fd);font-size:10px;letter-spacing:2px">F<span style="color:var(--orange)">O</span>FS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="env-cell" style="background:var(--black);border:1px solid var(--g700)">
+      <div class="elbl">Social / Digital</div>
+      <div style="display:flex;gap:24px;align-items:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="padding:3px;background:conic-gradient(var(--orange) 0deg,#FF9A00 120deg,var(--orange) 240deg,#FF9A00 360deg);border-radius:50%">
+            <div style="width:70px;height:70px;border-radius:50%;background:var(--black);display:flex;align-items:center;justify-content:center;border:2px solid var(--black)">
+              <img src="images/2.1.png" alt="" class="lm-avatar">
+            </div>
+          </div>
+          <div style="font-size:10px;font-weight:500">@fiveofifty</div>
+          <div style="font-family:var(--fm);font-size:8px;color:var(--g500)">Profile Avatar</div>
+        </div>
+        <div style="width:126px;background:var(--g900);border:1px solid var(--g700);border-radius:3px;overflow:hidden">
+          <div style="height:88px;background:var(--black);display:flex;align-items:center;justify-content:center;position:relative;padding:12px">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(255,92,0,.07),transparent 70%)"></div>
+            <img src="images/2.png" alt="" style="max-width:90%;max-height:28px;display:block;position:relative;object-fit:contain">
+          </div>
+          <div style="padding:7px 8px"><div style="font-size:8px;font-weight:600">FIVEOFIFTY STUDIOS</div><div style="font-family:var(--fm);font-size:7px;color:var(--g500);margin-top:1px">Post Cover</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email sig -->
+    <div class="env-cell" style="background:var(--g900);border:1px solid var(--g700)">
+      <div class="elbl">Email Signature</div>
+      <div style="width:84%;background:var(--black);border:1px solid var(--g700);border-radius:3px;padding:20px 24px">
+        <div style="font-size:12px;color:var(--g400);line-height:1.7;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--g700)">Looking forward to bringing this to life.</div>
+        <div style="display:flex;gap:16px;align-items:center">
+          <img src="images/2.1.png" alt="" class="lm-email-icon">
+          <div style="border-left:2px solid var(--orange);padding-left:14px">
+            <div style="font-size:12px;font-weight:600">Director Name</div>
+            <div style="font-family:var(--fd);font-size:11px;letter-spacing:2px;color:var(--orange);margin-top:1px">FIVEOFIFTY STUDIOS</div>
+            <div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-top:1px">name@fiveofifty.studio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Apparel -->
+    <div class="env-cell" style="background:var(--g800);border:1px solid var(--g700)">
+      <div class="elbl">Apparel / Merch</div>
+      <div style="display:flex;gap:20px;align-items:flex-end">
+        <div style="text-align:center">
+          <svg viewBox="0 0 180 200" width="110" height="122" fill="none">
+            <path d="M60 10 L18 42 L38 62 L28 182 H152 L142 62 L162 42 L120 10 Q100 32 80 32 Q60 32 60 10Z" fill="#0A0A0A" stroke="#3a3a3a" stroke-width="1.5"/>
+            <image href="images/2.1.png" x="72" y="58" width="36" height="36"/>
+          </svg>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-top:2px">Black</div>
+        </div>
+        <div style="text-align:center">
+          <svg viewBox="0 0 180 200" width="110" height="122" fill="none">
+            <path d="M60 10 L18 42 L38 62 L28 182 H152 L142 62 L162 42 L120 10 Q100 32 80 32 Q60 32 60 10Z" fill="#FF5C00" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+            <image href="images/2.1.png" x="72" y="58" width="36" height="36"/>
+          </svg>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-top:2px">Orange</div>
+        </div>
+        <div style="text-align:center">
+          <svg viewBox="0 0 180 200" width="110" height="122" fill="none">
+            <path d="M60 10 L18 42 L38 62 L28 182 H152 L142 62 L162 42 L120 10 Q100 32 80 32 Q60 32 60 10Z" fill="#1A1A1A" stroke="#444" stroke-width="1.5"/>
+            <image href="images/2.1.png" x="72" y="58" width="36" height="36"/>
+          </svg>
+          <div style="font-family:var(--fm);font-size:9px;color:var(--g500);margin-top:2px">Charcoal</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg">06 — ENVIRONMENTS</div>
+</section>
+
+<!-- ── DO & DON'T ── -->
+<section id="rules">
+  <div class="sec-label">06 — Usage Rules</div>
+  <div class="sec-title">DO & DON'T</div>
+  <div class="dont-grid">
+    <div class="dont-cell">
+      <div class="dont-head"><div class="dont-x">✕</div><span class="dont-r">Don't use on light backgrounds</span></div>
+      <div class="dont-vis" style="background:#EEEEEE"><img src="images/2.png" class="lm-dont" style="opacity:.6"></div>
+    </div>
+    <div class="dont-cell">
+      <div class="dont-head"><div class="dont-x">✕</div><span class="dont-r">Don't stretch or skew</span></div>
+      <div class="dont-vis"><img src="images/2.png" class="lm-dont" style="opacity:.4;transform:scaleY(1.5)"></div>
+    </div>
+    <div class="dont-cell">
+      <div class="dont-head"><div class="dont-x">✕</div><span class="dont-r">No off-brand colors</span></div>
+      <div class="dont-vis"><img src="images/2.png" class="lm-dont" style="opacity:.45;filter:sepia(1) saturate(4) hue-rotate(215deg)"></div>
+    </div>
+    <div class="dont-cell">
+      <div class="dont-head"><div class="dont-x">✕</div><span class="dont-r">No shadows or glows</span></div>
+      <div class="dont-vis"><div style="filter:drop-shadow(0 0 12px rgba(255,92,0,.9));opacity:.45"><img src="images/2.png" class="lm-dont"></div></div>
+    </div>
+  </div>
+  <div class="two">
+    <div style="background:rgba(0,210,80,.04);border:1px solid rgba(0,200,80,.16);padding:28px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px"><div style="width:16px;height:16px;background:#00C853;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0">✓</div><div style="font-family:var(--fm);font-size:10px;color:#00C853;letter-spacing:2px;text-transform:uppercase">Approved</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(0,200,80,.35)">White mark on black — canonical application</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(0,200,80,.35)">White mark on orange — hero moments only</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(0,200,80,.35)">Icon mark for app, avatar, and small contexts</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(0,200,80,.35)">Horizontal lockup for headers and slates</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(0,200,80,.35)">Stacked lockup for square and vertical formats</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,40,40,.04);border:1px solid rgba(255,40,40,.16);padding:28px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px"><div style="width:16px;height:16px;background:#FF2828;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white;flex-shrink:0">✕</div><div style="font-family:var(--fm);font-size:10px;color:#FF5050;letter-spacing:2px;text-transform:uppercase">Never Do</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(255,40,40,.35)">Place on white, cream, or light backgrounds</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(255,40,40,.35)">Stretch, skew, or distort any proportions</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(255,40,40,.35)">Apply drop shadows, glows, or gradients</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(255,40,40,.35)">Use any unapproved colours</div>
+        <div style="font-size:12px;color:var(--g300);padding-left:14px;border-left:2px solid rgba(255,40,40,.35)">Alter, recreate, or substitute the wordmark letterforms</div>
+      </div>
+    </div>
+  </div>
+  <div class="pg">07 — RULES</div>
+</section>
+
+<!-- ── MOTION ── -->
+<section id="motion">
+  <div class="sec-label">07 — Motion Identity</div>
+  <div class="sec-title">LOGO ANIMATION</div>
+  <p class="desc" style="margin-bottom:36px">The animated ident is the canonical motion expression of the brand — intro and outro on all produced video content.</p>
+  <div class="vimeo-wrap">
+    <iframe src="https://www.youtube.com/embed/LIg2qcp9lTw?si=_jafDnGeL8TSPo2j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <div class="three">
+    <div class="card"><div class="tag" style="display:block;margin-bottom:10px">Duration</div><div style="font-family:var(--fd);font-size:28px;letter-spacing:2px;margin-bottom:6px">3–5 sec</div><p style="font-size:12px;color:var(--g500);line-height:1.7">Recommended for pre-roll and end-slate on all branded video content.</p></div>
+    <div class="card"><div class="tag" style="display:block;margin-bottom:10px">Placement</div><div style="font-family:var(--fd);font-size:28px;letter-spacing:2px;margin-bottom:6px">Intro / End</div><p style="font-size:12px;color:var(--g500);line-height:1.7">Opens and closes all produced work. Never overlay over key content mid-edit.</p></div>
+    <div class="card"><div class="tag" style="display:block;margin-bottom:10px">Audio</div><div style="font-family:var(--fd);font-size:28px;letter-spacing:2px;margin-bottom:6px">Silent OK</div><p style="font-size:12px;color:var(--g500);line-height:1.7">Ident functions without audio. Optional subtle tone on the reveal moment.</p></div>
+  </div>
+  <div class="pg">08 — MOTION</div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer style="padding:56px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--g700)">
+  <div style="font-family:var(--fd);font-size:26px;letter-spacing:4px">FIVE<span style="color:var(--orange)">O</span>FIFTY <span style="font-family:var(--fb);font-size:13px;font-weight:300;letter-spacing:6px;color:var(--g500)">STUDIOS</span></div>
+  <div style="text-align:right">
+    <div style="font-family:var(--fm);font-size:10px;color:var(--g500);letter-spacing:1px;margin-bottom:3px">Brand Guidelines v1.0 — The Mark</div>
+    <div style="font-family:var(--fm);font-size:10px;color:var(--g600);letter-spacing:1px">© 2025 FiveOFifty Studios. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
