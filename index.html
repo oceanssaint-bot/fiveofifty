@@ -240,6 +240,37 @@ footer{
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .door:first-child{animation:fadeIn .65s ease .08s both}
 .door:last-child{animation:fadeIn .65s ease .2s both}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width:768px){
+  nav{padding:0 20px}
+  .nav-meta{font-size:9px;letter-spacing:1px}
+  .doors{flex-direction:column;min-height:auto}
+  .door{min-height:calc(100vh - 68px);padding:52px 24px;border-right:none;border-bottom:1px solid var(--g700)}
+  .door:last-child{border-bottom:none}
+  .door::after{left:5%;right:5%}
+  .door-divider{width:100%;height:1px;flex-direction:row}
+  .door-or{writing-mode:horizontal-tb;text-orientation:mixed;padding:0 14px}
+  .door-num{font-size:110px;bottom:20px;right:20px}
+  .preview-monolith{height:150px}
+  .preview-mark{max-width:260px;max-height:64px}
+  .door-title{font-size:clamp(36px,9vw,60px);letter-spacing:4px}
+  .door-desc{font-size:12px;max-width:280px}
+  .door-corner.tl{top:16px;left:16px}
+  .door-corner.tr{top:16px;right:16px}
+  .door-corner.bl{bottom:16px;left:16px}
+  .door-corner.br{bottom:16px;right:16px}
+  footer{padding:14px 20px;flex-direction:column;gap:4px;align-items:flex-start}
+}
+@media (max-width:480px){
+  nav{padding:0 16px}
+  .door{padding:44px 20px}
+  .preview-monolith{height:120px}
+  .preview-mark{max-width:200px;max-height:50px}
+  .door-title{letter-spacing:3px}
+  .door-tag{margin-bottom:28px}
+  .door-preview{margin-bottom:36px}
+}
 </style>
 </head>
 <body>
