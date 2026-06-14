@@ -238,8 +238,7 @@ body.menu-open .mobile-menu{transform:translateY(0);visibility:visible;}
 
 /* seal motif */
 .seal{position:relative;display:inline-grid;place-items:center;}
-.seal .ring{grid-area:1/1;animation:seal-spin 22s linear infinite;}
-.seal .mark{grid-area:1/1;position:relative;z-index:1;width:44%;height:auto;}
+.seal .seal-logo{width:100%;height:100%;object-fit:contain;animation:seal-spin 22s linear infinite;}
 @keyframes seal-spin{to{transform:rotate(360deg);}}
 
 /* ============================================================================
@@ -526,5 +525,5 @@ body.intro-cleared .site-header,body.intro-cleared main,body.intro-cleared .site
 /* reduced motion */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
-  .seal .ring{animation:none;}
+  .seal .seal-logo{animation:none;}
 }
