@@ -10,7 +10,7 @@ backend:
   name: github
   repo: oceanssaint-bot/fiveofifty
   branch: main
-  base_url: https://YOUR-DOMAIN.vercel.app   # your deployed site URL
+  base_url: https://fiveofifty.vercel.app   # your deployed site URL
   auth_endpoint: api/auth
 
 # Where uploaded images (e.g. custom thumbnails) are stored in the repo.
@@ -19,7 +19,7 @@ public_folder: "/assets/uploads"
 
 # Show a clear message and keep editors out of the weeds.
 publish_mode: simple
-site_url: https://YOUR-DOMAIN.vercel.app
+site_url: https://fiveofifty.vercel.app
 
 collections:
   - name: work
