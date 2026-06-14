@@ -1,0 +1,44 @@
+{
+  "videos": [
+    {
+      "title": "Neon Atlas",
+      "category": "Fashion Film",
+      "year": "2026",
+      "platform": "youtube",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "description": "A nocturnal fashion film for a Durban label — neon, rain and motion.",
+      "thumbnail": "",
+      "featured": true
+    },
+    {
+      "title": "Ridge Motors",
+      "category": "Commercial",
+      "year": "2026",
+      "platform": "vimeo",
+      "url": "https://vimeo.com/76979871",
+      "description": "Hero spot for a flagship launch — built around speed and surface.",
+      "thumbnail": "",
+      "featured": true
+    },
+    {
+      "title": "After Hours",
+      "category": "Entertainment",
+      "year": "2025",
+      "platform": "youtube",
+      "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+      "description": "Title sequence and key art for a late-night entertainment series.",
+      "thumbnail": "",
+      "featured": true
+    },
+    {
+      "title": "Lowtide",
+      "category": "Music Video",
+      "year": "2025",
+      "platform": "vimeo",
+      "url": "https://vimeo.com/22439234",
+      "description": "Single-take music video shot on the coast at first light.",
+      "thumbnail": "",
+      "featured": true
+    }
+  ]
+}

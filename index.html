@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FIVEOFIFTY STUDIOS — Creative Production House · Durban</title>
+<meta name="description" content="FIVEOFIFTY STUDIOS — a bold creative production house from Durban, South Africa, working across fashion, entertainment and commercial film." />
+<meta property="og:title" content="FIVEOFIFTY STUDIOS" />
+<meta property="og:description" content="A bold creative production house from Durban, South Africa." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/og-placeholder.png" />
+<link rel="icon" type="image/png" href="assets/mark-black.png" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-fade home">
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ====================== BRAND INTRO (logo animation) ====================== -->
+<div class="brand-intro" id="brand-intro" aria-hidden="true">
+  <video class="brand-intro__video" muted playsinline preload="auto"
+         src="assets/logo-animation.mp4"></video>
+</div>
+
+<!-- ====================== HEADER (home — centered, over hero) ====================== -->
+<header class="site-header site-header--home" id="site-header">
+  <div class="hh-inner">
+    <a class="brand brand--center" href="index.html" aria-label="FIVEOFIFTY STUDIOS — home">
+      <span class="wm">FIVE<span class="o">O</span>FIFTY</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-list nav-list--center">
+        <li class="nav-item nav-item--current"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item nav-item--has-menu">
+          <a class="nav-link" href="videos.html">Work <span class="chev" aria-hidden="true"></span></a>
+          <div class="nav-menu" role="menu" aria-label="Work">
+            <a role="menuitem" href="stills.html">Stills <span class="mi">01</span></a>
+            <a role="menuitem" href="videos.html">Videos <span class="mi">02</span></a>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <button class="hamburger hamburger--home" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+
+<!-- mobile overlay -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <ul>
+    <li><a href="index.html" class="is-current"><span class="mnum">01</span>Home</a></li>
+    <li><a href="videos.html"><span class="mnum">02</span>Work</a></li>
+    <li class="sub"><a href="stills.html">Stills</a><a href="videos.html">Videos</a></li>
+    <li><a href="contact.html"><span class="mnum">03</span>Contact</a></li>
+  </ul>
+  <div class="mm-foot">Durban · South Africa &nbsp;—&nbsp; @fiveofiftystudios</div>
+</div>
+
+<main id="main">
+
+  <!-- ====================== CINEMATIC VIDEO HERO ====================== -->
+  <section class="hero-cine" aria-label="Showreel preview">
+    <video class="hero-cine__video" autoplay muted loop playsinline preload="auto"
+           poster="https://picsum.photos/seed/fof-hero/1920/1080?grayscale"
+           src="assets/Bernini.mp4"></video>
+    <div class="hero-cine__scrim" aria-hidden="true"></div>
+    <a class="hero-cine__scroll" href="#showreel" aria-label="Scroll to showreel">
+      <span class="hcs-txt">Scroll</span>
+      <span class="hcs-line" aria-hidden="true"></span>
+    </a>
+  </section>
+
+  <!-- ====================== SHOWREEL + MANIFESTO ====================== -->
+  <section class="showreel" id="showreel" aria-labelledby="reel-h">
+    <a class="reel-link" href="#" aria-label="Play showreel">
+      <span class="reel-word" id="reel-h">Showreel</span>
+      <span class="reel-play"><span class="pp" aria-hidden="true"><svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><path d="M0 0l12 7-12 7z"/></svg></span>Play 2026 reel</span>
+    </a>
+    <div class="manifesto wrap">
+      <blockquote>FIVEOFIFTY STUDIOS is a bold creative production house from South Africa, building image and motion for fashion, entertainment and commercial work. We chase the frame nobody expected and finish it like it&rsquo;s going on a billboard.</blockquote>
+    </div>
+  </section>
+
+  <!-- ====================== WHAT WE DO ====================== -->
+  <section class="section" aria-labelledby="wwd-h">
+    <h2 class="sec-label" id="wwd-h">What We Do</h2>
+    <div class="wrap services">
+      <div class="svc">
+        <span class="svc-n">01</span>
+        <h3 class="svc-t">Film &amp; Motion</h3>
+        <p class="svc-d">Fashion films, commercials and music videos — concept, direction and shoot through to the final grade.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-n">02</span>
+        <h3 class="svc-t">Stills &amp; Editorial</h3>
+        <p class="svc-d">Campaign and editorial photography — look, light and art direction built for print and screen.</p>
+      </div>
+      <div class="svc">
+        <span class="svc-n">03</span>
+        <h3 class="svc-t">Direction &amp; Post</h3>
+        <p class="svc-d">Creative direction, edit, sound and colour — a single team carrying the idea from brief to delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== LATEST WORK — TIMELINE ====================== -->
+  <section class="section section--timeline" aria-labelledby="work-h">
+    <h2 class="sec-label" id="work-h">Latest Work</h2>
+    <!-- Rows are rendered from data/videos.json by main.js (managed via /admin) -->
+    <ol class="timeline wrap" data-work-timeline aria-live="polite"></ol>
+    <div class="tl-foot">
+      <a class="btn btn--ghost" href="videos.html">See all work <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="site-footer">
+  <div class="seal footer-seal" aria-hidden="true">
+    <img class="ring" src="assets/ring-black.png" alt="" style="width:100%;height:100%;" />
+    <img class="mark" src="assets/mark-black.png" alt="" />
+  </div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/fiveofiftystudios/" target="_blank" rel="noopener">Instagram</a>
+    <span class="sep">·</span>
+    <a href="https://www.tiktok.com/@fiveofiftystudios" target="_blank" rel="noopener">TikTok</a>
+    <span class="sep">·</span>
+    <a href="contact.html">Start a project</a>
+  </div>
+  <p class="footer-copy">© <span id="year">2026</span> FIVEOFIFTY STUDIOS — Durban, South Africa</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

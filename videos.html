@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VIDEOS | FIVEOFIFTY STUDIOS</title>
+<meta name="description" content="Selected motion work by FIVEOFIFTY STUDIOS — fashion film, commercial, music video and entertainment." />
+<meta property="og:title" content="Videos | FIVEOFIFTY STUDIOS" />
+<meta property="og:description" content="Selected motion work — fashion, entertainment and commercial." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/og-placeholder.png" />
+<link rel="icon" type="image/png" href="assets/mark-black.png" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-fade">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="FIVEOFIFTY STUDIOS — home">
+      <img src="assets/mark-black.png" alt="" />
+      <span class="wm">FIVE<span class="o">O</span>FIFTY</span>
+    </a>
+    <ul class="nav-list">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item nav-item--has-menu nav-item--current">
+        <a class="nav-link" href="videos.html">Work <span class="chev" aria-hidden="true"></span></a>
+        <div class="nav-menu" role="menu" aria-label="Work">
+          <a role="menuitem" href="stills.html">Stills <span class="mi">01</span></a>
+          <a role="menuitem" class="is-current" href="videos.html">Videos <span class="mi">02</span></a>
+        </div>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <ul>
+    <li><a href="index.html"><span class="mnum">01</span>Home</a></li>
+    <li><a href="videos.html" class="is-current"><span class="mnum">02</span>Work</a></li>
+    <li class="sub"><a href="stills.html">Stills</a><a href="videos.html" class="is-current">Videos</a></li>
+    <li><a href="contact.html"><span class="mnum">03</span>Contact</a></li>
+  </ul>
+  <div class="mm-foot">Durban · South Africa &nbsp;—&nbsp; @fiveofiftystudios</div>
+</div>
+
+<main id="main">
+  <section class="page-intro">
+    <h1 class="sec-label">Videos</h1>
+  </section>
+
+  <section class="section--tight">
+    <!-- Tiles are rendered from data/videos.json by main.js (managed via /admin) -->
+    <div class="grid-uniform grid-bleed" id="videos-grid" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="seal footer-seal" aria-hidden="true">
+    <img class="ring" src="assets/ring-black.png" alt="" style="width:100%;height:100%;" />
+    <img class="mark" src="assets/mark-black.png" alt="" />
+  </div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/fiveofiftystudios/" target="_blank" rel="noopener">Instagram</a>
+    <span class="sep">·</span>
+    <a href="https://www.tiktok.com/@fiveofiftystudios" target="_blank" rel="noopener">TikTok</a>
+    <span class="sep">·</span>
+    <a href="contact.html">Start a project</a>
+  </div>
+  <p class="footer-copy">© <span id="year">2026</span> FIVEOFIFTY STUDIOS — Durban, South Africa</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
