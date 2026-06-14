@@ -12,6 +12,7 @@
     initMobileMenu();
     initBrandIntro();
     initStickyHeader();
+    initHeroVideo();
     initWork();
     initLazyVideo();
     initLightbox();
@@ -56,6 +57,21 @@
     document.addEventListener('keydown', function onKey(e) {
       if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') { clearTimeout(safety); clear(); document.removeEventListener('keydown', onKey); }
     });
+  }
+
+  /* --- Cinematic hero video: guarantee muted autoplay + loop --------------- */
+  function initHeroVideo() {
+    var v = document.querySelector('.hero-cine__video');
+    if (!v) return;
+    v.muted = true;            // required for autoplay on most browsers / iOS
+    v.loop = true;
+    v.setAttribute('playsinline', '');
+    function play() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    play();
+    // retry once metadata is ready and after the brand intro clears / first tap
+    v.addEventListener('loadeddata', play);
+    document.addEventListener('click', play, { once: true });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
   }
 
   /* --- Home: transparent header turns solid on scroll ---------------------- */

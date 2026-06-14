@@ -356,8 +356,9 @@ body.menu-open .mobile-menu{transform:translateY(0);visibility:visible;}
 .work-empty{grid-column:1/-1;text-align:center;color:var(--n500,#888);font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;padding:var(--s-7) 0;}
 
 /* page intro header (work / team / contact) */
-.page-intro{padding-top:var(--s-8);text-align:center;}
-.page-intro .sec-label{margin-bottom:0;}
+.page-intro{padding-top:var(--s-9);padding-bottom:var(--s-7);text-align:center;}
+.page-kicker{display:block;font-family:var(--font-mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);margin-bottom:var(--s-4);}
+.page-title{font-family:var(--font-display);font-size:clamp(60px,11vw,160px);line-height:.86;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);text-wrap:balance;}
 
 /* skip link */
 .skip{position:absolute;left:-9999px;top:8px;z-index:300;background:var(--ink);color:#fff;padding:10px 16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;border-radius:var(--r-sm);}
@@ -496,6 +497,7 @@ body.intro-cleared .site-header,body.intro-cleared main,body.intro-cleared .site
   .section{padding-top:var(--s-8);padding-bottom:var(--s-8);}
   /* tighten the big editorial gaps so phones don't show dead space */
   .showreel{padding-top:var(--s-8);padding-bottom:var(--s-8);}
+  .page-intro{padding-top:var(--s-7);padding-bottom:var(--s-6);}
   .manifesto{margin-top:var(--s-7);}
   .tl-foot{margin-top:var(--s-7);}
   .svc{padding:var(--s-6) 0;}
