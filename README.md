@@ -7,8 +7,7 @@ A static, multi-page portfolio site for FIVEOFIFTY STUDIOS (creative production 
 ```
 site/
 ├── index.html      Home — editorial hero, Highlights, Showreel + manifesto, Latest
-├── videos.html     Work / Videos — 12 portrait video tiles (hover to unmute)
-├── stills.html     Work / Stills — 15 photos + lightbox (arrow-key nav)
+├── videos.html     Work — video tiles rendered from data/videos.json (click to play)
 ├── team.html       Meet the Team — 4 members, alternating layout
 ├── contact.html    Studio info + contact form (Netlify Forms ready)
 ├── styles.css      All styling + brand tokens
@@ -48,8 +47,6 @@ All media is placeholder. Swap before going live:
 - [ ] **Videos** — replace every `https://commondatastorage.googleapis.com/...mp4` with
       client reels. Use `data-src` (lazy-loaded) + a `poster` image. Compress to ≤ 5 MB
       per loop (MP4/WebM), keep `muted loop playsinline`.
-- [ ] **Stills** — replace every `https://picsum.photos/seed/...` image (thumb + the
-      `data-full` large version on stills.html) with client photography.
 - [ ] **Team** — real photos (`assets/`), names, roles, and **client-approved bios**
       (remove the "Placeholder bio" flags in `team.html`).
 - [ ] **Manifesto** — approve / replace the draft copy in `index.html`

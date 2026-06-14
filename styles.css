@@ -96,6 +96,7 @@ p{text-wrap:pretty;}
 .bleed{width:100%;}
 
 .sec-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;text-align:center;color:var(--ink);margin-bottom:var(--s-6);}
+.sec-title{font-family:var(--font-display);font-size:clamp(40px,5.5vw,80px);line-height:.92;letter-spacing:.02em;text-transform:uppercase;text-align:center;color:var(--ink);margin-bottom:var(--s-7);}
 
 .accent-bar{width:2px;height:64px;background:var(--orange);}
 
@@ -327,6 +328,9 @@ body.menu-open .mobile-menu{transform:translateY(0);visibility:visible;}
 .footer-links a:hover{color:var(--orange);}
 .footer-links .sep{color:var(--n300);}
 .footer-copy{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);}
+.footer-credit{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);margin-top:var(--s-3);}
+.footer-credit a{color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:1px;transition:color var(--dur-fast),border-color var(--dur-fast);}
+.footer-credit a:hover{color:var(--orange);border-color:var(--orange);}
 
 /* ============================================================================
    LIGHTBOX (stills)
@@ -412,11 +416,17 @@ body.intro-cleared .site-header,body.intro-cleared main,body.intro-cleared .site
    HOME — What We Do
    ============================================================================ */
 .services{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
-.svc{padding:var(--s-8) clamp(28px,3.2vw,56px);border-right:1px solid var(--line);}
+.svc{position:relative;padding:var(--s-8) clamp(28px,3.2vw,56px);border-right:1px solid var(--line);transition:background var(--dur) var(--ease-out);}
 .svc:first-child{padding-left:0;}
 .svc:last-child{border-right:none;padding-right:0;}
-.svc-n{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--orange);display:block;margin-bottom:var(--s-6);}
-.svc-t{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);letter-spacing:.03em;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:var(--s-4);}
+/* hover: warm wash + an orange bar that wipes across the top of the cell */
+.svc::before{content:"";position:absolute;top:-1px;left:0;height:2px;width:0;background:var(--orange);transition:width var(--dur-slow) var(--ease-out);}
+.svc:hover{background:var(--paper-warm);}
+.svc:hover::before{width:100%;}
+.svc-n{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--orange);display:block;margin-bottom:var(--s-6);transition:letter-spacing var(--dur) var(--ease-out);}
+.svc:hover .svc-n{letter-spacing:.42em;}
+.svc-t{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);letter-spacing:.03em;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:var(--s-4);transition:color var(--dur) var(--ease-out),transform var(--dur) var(--ease-out);}
+.svc:hover .svc-t{color:var(--orange);transform:translateX(6px);}
 .svc-d{font-size:15px;line-height:1.8;color:var(--fg2);max-width:36ch;}
 
 /* ============================================================================
@@ -459,6 +469,11 @@ body.intro-cleared .site-header,body.intro-cleared main,body.intro-cleared .site
 .page-fade{animation:pageIn .55s var(--ease-out) both;}
 .page-fade.is-leaving{animation:none;opacity:0;transition:opacity .3s var(--ease-out);}
 @keyframes pageIn{from{opacity:0;}to{opacity:1;}}
+
+/* scroll reveal — content flows up into place as it enters the viewport */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);}
+.reveal.is-in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal,.reveal.is-in{opacity:1;transform:none;transition:none;}}
 
 /* hover-to-unmute badge on video tiles */
 .tile .sound-badge{

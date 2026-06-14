@@ -13,6 +13,7 @@
     initBrandIntro();
     initStickyHeader();
     initHeroVideo();
+    initReveal();
     initWork();
     initLazyVideo();
     initLightbox();
@@ -72,6 +73,35 @@
     v.addEventListener('loadeddata', play);
     document.addEventListener('click', play, { once: true });
     document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
+  }
+
+  /* --- Scroll reveal: fade + rise elements as they enter the viewport ------ */
+  var revealIO = null;
+  function initReveal() {
+    if (prefersReduced || !('IntersectionObserver' in window)) return;
+    revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); revealIO.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    observeReveal(document.querySelectorAll('.sec-title, .manifesto, .showreel .reel-link, .page-kicker, .page-title, .tl-foot'));
+    observeReveal(document.querySelectorAll('.services .svc'), 90);
+    observeReveal(document.querySelectorAll('.team-member'), 90);
+    observeReveal(document.querySelectorAll('.contact-grid > *'), 90);
+  }
+
+  // Tag elements for reveal; ones already on-screen show instantly (no flash).
+  // `step` staggers a group via transition-delay (ms per index).
+  function observeReveal(els, step) {
+    if (prefersReduced || !revealIO || !els || !els.length) return;
+    [].forEach.call(els, function (el, i) {
+      if (step) el.style.transitionDelay = (i * step) + 'ms';
+      el.classList.add('reveal');
+      var top = el.getBoundingClientRect().top;
+      if (top < (window.innerHeight || 0) * 0.92) el.classList.add('is-in'); // already visible
+      else revealIO.observe(el);
+    });
   }
 
   /* --- Home: transparent header turns solid on scroll ---------------------- */
@@ -371,8 +401,8 @@
       .then(function (r) { if (!r.ok) throw new Error('load failed'); return r.json(); })
       .then(function (data) {
         var items = (data && data.videos ? data.videos : []).map(parseEntry).filter(Boolean);
-        if (grid) renderGrid(grid, items);
-        if (timeline) renderTimeline(timeline, items);
+        if (grid) { renderGrid(grid, items); observeReveal(grid.querySelectorAll('.tile'), 55); }
+        if (timeline) { renderTimeline(timeline, items); observeReveal(timeline.querySelectorAll('.tl-row'), 70); }
         if (items.length) ensureVideoModal();
         backfillVimeoThumbs(items);
       })
