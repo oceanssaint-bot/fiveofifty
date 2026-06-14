@@ -29,16 +29,6 @@
       "description": "Title sequence and key art for a late-night entertainment series.",
       "thumbnail": "",
       "featured": true
-    },
-    {
-      "title": "Lowtide",
-      "category": "Music Video",
-      "year": "2025",
-      "platform": "vimeo",
-      "url": "https://vimeo.com/22439234",
-      "description": "Single-take music video shot on the coast at first light.",
-      "thumbnail": "",
-      "featured": true
     }
   ]
 }
