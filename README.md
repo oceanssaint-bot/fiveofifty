@@ -63,49 +63,45 @@ All media is placeholder. Swap before going live:
 
 ---
 
-## Self-service CMS (owner adds work without touching code)
+## Self-service CMS (client adds work with a passcode — no GitHub access)
 
 The work list is **data-driven**. The Videos page and the home **Latest Work** list both
 render from one file — [`data/videos.json`](data/videos.json) — via `initWork()` in `main.js`.
-Add an entry there and both update. The owner edits this file through a friendly form at
-**`/admin`** (Decap CMS); no HTML required.
+The client edits this file through a passcode-protected form at **`/admin`**. They never
+touch GitHub: saving runs through a serverless function that commits to the repo using
+**your** token (kept secret on the server).
 
 ```
-data/videos.json   ← the work list (title, category, year, platform, link, …)
-admin/             ← Decap CMS (the /admin login + form)
-api/auth.js        ← GitHub OAuth start  (Vercel serverless function)
-api/callback.js    ← GitHub OAuth finish (Vercel serverless function)
+data/videos.json    ← the work list (title, category, year, platform, link, …)
+admin/index.html    ← the /admin passcode login + editing form (self-contained)
+api/save-videos.js  ← validates the passcode, commits data/videos.json via GitHub API
 ```
 
-**Flow:** owner opens `yoursite.com/admin` → *Login with GitHub* → fills the form
-(paste a YouTube/Vimeo link) → **Publish** → commits `data/videos.json` to GitHub →
+**Flow:** client opens `yoursite.com/admin` → enters the **passcode** → edits the form
+(paste a YouTube/Vimeo link) → **Publish** → the function commits `data/videos.json` →
 Vercel redeploys (~1 min) → live. Tiles open a player modal; YouTube thumbnails are
 auto-derived, Vimeo thumbnails are fetched via Vimeo oEmbed (or set a custom one).
 
 ### One-time setup (needs your GitHub + Vercel accounts)
 
-1. **Push to GitHub** — create a repo and push this folder:
-   `git add . && git commit -m "Site + CMS" && git remote add origin <repo-url> && git push -u origin main`
-2. **Deploy on Vercel** — *New Project* → import the repo. Framework preset: **Other**
-   (it's static, no build). Deploy.
-3. **Create a GitHub OAuth App** — GitHub → *Settings → Developer settings → OAuth Apps → New*:
-   - Homepage URL: `https://YOUR-DOMAIN.vercel.app`
-   - Authorization callback URL: `https://YOUR-DOMAIN.vercel.app/api/callback`
-   - Copy the **Client ID** and generate a **Client Secret**.
-4. **Add env vars in Vercel** (*Project → Settings → Environment Variables*), then redeploy:
-   - `OAUTH_GITHUB_CLIENT_ID`
-   - `OAUTH_GITHUB_CLIENT_SECRET`
-5. **Edit [`admin/config.yml`](admin/config.yml)** — replace the 3 placeholders:
-   `repo: OWNER/REPO`, and both `https://YOUR-DOMAIN.vercel.app` URLs. Commit + push.
-6. Visit `https://YOUR-DOMAIN.vercel.app/admin` and log in with GitHub. Done.
+1. **Create a fine-grained GitHub token** — GitHub → *Settings → Developer settings →
+   Personal access tokens → Fine-grained tokens → Generate new*:
+   - **Resource owner:** your account · **Repository access:** *Only select repositories* →
+     pick `fiveofifty`.
+   - **Permissions:** *Repository permissions → Contents → Read and write*.
+   - Generate and copy the token (starts with `github_pat_…`).
+2. **Add two env vars in Vercel** (*Project → Settings → Environment Variables*, Production),
+   then redeploy:
+   - `GITHUB_TOKEN` = the fine-grained token from step 1
+   - `ADMIN_PASSWORD` = the passcode you'll give the client
+   - *(optional)* `GITHUB_REPO` (default `oceanssaint-bot/fiveofifty`), `GITHUB_BRANCH` (default `main`)
+3. Visit `https://YOUR-DOMAIN/admin`, enter the passcode, and publish a test change. Done —
+   give the client only the URL and the passcode.
 
-> The owner's GitHub account must have write access to the repo. To add the owner without
-> giving them the whole GitHub account, invite them as a collaborator on the repo.
-
-> **Simpler-auth alternative:** [Sveltia CMS](https://github.com/sveltia/sveltia-cms) is a
-> drop-in Decap replacement that uses the *same* `config.yml` but needs no `api/` OAuth
-> functions on Vercel. Swap the script in `admin/index.html` if you'd rather skip steps 3–4.
+> **Why this is safe:** the GitHub token lives only in Vercel's server environment and is
+> never sent to the browser. The client authenticates with the passcode alone. To rotate
+> access later, change `ADMIN_PASSWORD` (client) or regenerate `GITHUB_TOKEN` (you).
 
 ## Backlog / nice-to-haves (not yet built)
-Hover-to-unmute on video tiles ✓ · page-transition fades ✓ · CMS layer (Decap) ✓ ·
+Hover-to-unmute on video tiles ✓ · page-transition fades ✓ · passcode CMS ✓ ·
 Stills via CMS (image uploads) · analytics (Plausible/GA4).

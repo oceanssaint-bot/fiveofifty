@@ -1,15 +1,237 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex" />
-  <title>FIVEOFIFTY — Content Manager</title>
-  <!-- Absolute path so the config loads whether the URL is /admin or /admin/ -->
-  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>FIVEOFIFTY — Manage Work</title>
+<style>
+  :root{
+    --paper:#fff; --ink:#0A0A0A; --orange:#FF5C00;
+    --line:#E2E0DB; --n100:#EFEDE8; --n500:#767676; --n600:#555;
+    --mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --r:4px;
+  }
+  *{box-sizing:border-box;margin:0;}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:880px;margin:0 auto;padding:40px 22px 96px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:28px;}
+  .brand{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);}
+  .brand b{color:var(--orange);}
+  h1{font-size:30px;letter-spacing:-.01em;margin:2px 0 4px;}
+  .sub{color:var(--n500);font-size:14px;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+
+  label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--n500);margin:0 0 6px;}
+  input,select,textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:11px 12px;transition:border-color .15s;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--orange);}
+  textarea{resize:vertical;min-height:62px;}
+
+  .btn{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:12px 22px;cursor:pointer;transition:.15s;}
+  .btn:hover{background:var(--orange);border-color:var(--orange);}
+  .btn:disabled{opacity:.5;cursor:default;}
+  .btn--ghost{background:transparent;color:var(--ink);}
+  .btn--ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .btn--mini{padding:7px 13px;font-size:11px;border-color:var(--line);background:#fff;color:var(--n600);}
+  .btn--mini:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .btn--danger:hover{background:#c0341d;border-color:#c0341d;color:#fff;}
+
+  /* lock screen */
+  #lock{max-width:380px;margin:14vh auto 0;text-align:center;padding:0 22px;}
+  #lock .seal{font-size:34px;letter-spacing:.06em;margin-bottom:10px;}
+  #lock form{margin-top:22px;display:flex;flex-direction:column;gap:14px;}
+  #lock input{text-align:center;letter-spacing:.1em;}
+
+  /* cards */
+  .card{border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:16px;background:#fff;}
+  .card.is-empty{border-style:dashed;}
+  .card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
+  .card-num{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--n500);}
+  .card-tools{display:flex;gap:6px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid .full{grid-column:1/-1;}
+  .row-check{display:flex;align-items:center;gap:9px;margin-top:2px;}
+  .row-check input{width:auto;}
+  .row-check label{margin:0;text-transform:none;font-size:13px;letter-spacing:0;color:var(--ink);}
+  .hint{font-size:12px;color:var(--n500);margin-top:5px;}
+
+  .actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;bottom:0;background:linear-gradient(to top,var(--paper) 70%,transparent);padding:18px 0 6px;margin-top:8px;}
+  .status{font-family:var(--mono);font-size:12px;letter-spacing:.04em;}
+  .status.ok{color:#1a7f37;} .status.err{color:#c0341d;}
+  .hidden{display:none !important;}
+  @media(max-width:560px){.grid{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
-  <!-- Decap CMS: owner logs in with GitHub, edits work, hits Publish. -->
-  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
+
+<!-- LOCK SCREEN -->
+<section id="lock">
+  <div class="seal brand">FIVE<b>O</b>FIFTY</div>
+  <div class="kicker">Studio Content Manager</div>
+  <p class="sub">Enter your passcode to manage the work list.</p>
+  <form id="lock-form">
+    <input id="passcode" type="password" placeholder="Passcode" autocomplete="current-password" required />
+    <button class="btn" type="submit">Unlock</button>
+    <div class="status err" id="lock-status"></div>
+  </form>
+</section>
+
+<!-- APP -->
+<main class="wrap hidden" id="app">
+  <div class="topbar">
+    <div>
+      <div class="brand">FIVE<b>O</b>FIFTY — Manage Work</div>
+      <h1>Videos</h1>
+      <div class="sub">Add, edit, or remove work. Paste a YouTube or Vimeo link — the rest fills the site automatically.</div>
+    </div>
+    <button class="btn btn--ghost" id="logout" type="button">Log out</button>
+  </div>
+
+  <div id="list"></div>
+
+  <button class="btn btn--ghost" id="add" type="button">+ Add video</button>
+
+  <div class="actions">
+    <button class="btn" id="publish" type="button">Publish changes</button>
+    <span class="status" id="status"></span>
+  </div>
+  <p class="hint">Publishing saves to the site and goes live in about a minute.</p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var KEY = 'fof-admin-key';
+  var CATS = ['Fashion Film','Commercial','Music Video','Entertainment','Documentary','Other'];
+  var videos = [];
+
+  var lock = document.getElementById('lock');
+  var app = document.getElementById('app');
+  var listEl = document.getElementById('list');
+  var statusEl = document.getElementById('status');
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function getKey(){ try { return sessionStorage.getItem(KEY) || ''; } catch(e){ return ''; } }
+  function setKey(k){ try { sessionStorage.setItem(KEY, k); } catch(e){} }
+  function clearKey(){ try { sessionStorage.removeItem(KEY); } catch(e){} }
+
+  function blank(){ return { title:'', category:CATS[0], year:String(new Date().getFullYear()), platform:'youtube', url:'', description:'', thumbnail:'', featured:true }; }
+
+  function render(){
+    if (!videos.length){
+      listEl.innerHTML = '<div class="card is-empty"><div class="sub">No work yet. Click “+ Add video” to create the first entry.</div></div>';
+      return;
+    }
+    listEl.innerHTML = videos.map(function(v,i){
+      var opts = CATS.map(function(c){ return '<option'+(c===v.category?' selected':'')+'>'+esc(c)+'</option>'; }).join('');
+      return '<div class="card" data-i="'+i+'">'+
+        '<div class="card-head"><span class="card-num">'+String(i+1).padStart(2,'0')+'</span>'+
+          '<div class="card-tools">'+
+            '<button class="btn btn--mini" data-act="up" '+(i===0?'disabled':'')+'>↑</button>'+
+            '<button class="btn btn--mini" data-act="down" '+(i===videos.length-1?'disabled':'')+'>↓</button>'+
+            '<button class="btn btn--mini btn--danger" data-act="del">Remove</button>'+
+          '</div>'+
+        '</div>'+
+        '<div class="grid">'+
+          '<div class="full"><label>Title</label><input data-f="title" value="'+esc(v.title)+'" placeholder="e.g. Neon Atlas" /></div>'+
+          '<div><label>Category</label><select data-f="category">'+opts+'</select></div>'+
+          '<div><label>Year</label><input data-f="year" value="'+esc(v.year)+'" inputmode="numeric" placeholder="2026" /></div>'+
+          '<div><label>Platform</label><select data-f="platform">'+
+            '<option value="youtube"'+(v.platform==='youtube'?' selected':'')+'>YouTube</option>'+
+            '<option value="vimeo"'+(v.platform==='vimeo'?' selected':'')+'>Vimeo</option>'+
+          '</select></div>'+
+          '<div><label>Feature on home?</label><div class="row-check"><input type="checkbox" id="feat'+i+'" data-f="featured" '+(v.featured?'checked':'')+' /><label for="feat'+i+'">Show in Latest Work</label></div></div>'+
+          '<div class="full"><label>Video link (YouTube or Vimeo URL)</label><input data-f="url" value="'+esc(v.url)+'" placeholder="https://www.youtube.com/watch?v=…" /></div>'+
+          '<div class="full"><label>Short description</label><textarea data-f="description" placeholder="One line about the project.">'+esc(v.description)+'</textarea></div>'+
+          '<div class="full"><label>Custom thumbnail URL (optional)</label><input data-f="thumbnail" value="'+esc(v.thumbnail)+'" placeholder="Leave blank — pulled from the link automatically" /><div class="hint">YouTube thumbnails are automatic. Add a URL only to override.</div></div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }
+
+  function collect(){
+    var cards = listEl.querySelectorAll('.card[data-i]');
+    var out = [];
+    [].forEach.call(cards, function(card){
+      var o = blank();
+      [].forEach.call(card.querySelectorAll('[data-f]'), function(el){
+        var f = el.getAttribute('data-f');
+        o[f] = (el.type === 'checkbox') ? el.checked : el.value;
+      });
+      out.push(o);
+    });
+    videos = out;
+  }
+
+  // events on the list (delegation)
+  listEl.addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    var card = btn.closest('.card[data-i]');
+    var i = parseInt(card.getAttribute('data-i'), 10);
+    collect();
+    var act = btn.getAttribute('data-act');
+    if (act === 'del') videos.splice(i,1);
+    else if (act === 'up' && i>0){ var t=videos[i-1]; videos[i-1]=videos[i]; videos[i]=t; }
+    else if (act === 'down' && i<videos.length-1){ var t2=videos[i+1]; videos[i+1]=videos[i]; videos[i]=t2; }
+    render();
+  });
+
+  document.getElementById('add').addEventListener('click', function(){ collect(); videos.push(blank()); render(); window.scrollTo(0, document.body.scrollHeight); });
+
+  document.getElementById('publish').addEventListener('click', function(){
+    collect();
+    var clean = videos.filter(function(v){ return v.title.trim() && v.url.trim(); });
+    var btn = this;
+    setStatus('Publishing…', '');
+    btn.disabled = true;
+    fetch('/api/save-videos', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ key: getKey(), videos: clean })
+    }).then(function(r){ return r.json().then(function(j){ return { ok:r.ok, status:r.status, j:j }; }); })
+      .then(function(res){
+        if (res.ok){ setStatus('Saved ✓  Your site will update in about a minute.', 'ok'); }
+        else if (res.status === 401){ setStatus('Wrong passcode — please log out and re-enter it.', 'err'); }
+        else { setStatus('Error: ' + (res.j && res.j.error ? res.j.error : 'could not save.'), 'err'); }
+      })
+      .catch(function(){ setStatus('Network error — please try again.', 'err'); })
+      .then(function(){ btn.disabled = false; });
+  });
+
+  document.getElementById('logout').addEventListener('click', function(){ clearKey(); location.reload(); });
+
+  function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = 'status' + (cls ? ' ' + cls : ''); }
+
+  function loadData(){
+    return fetch('/data/videos.json?ts=' + Date.now(), { cache:'no-store' })
+      .then(function(r){ return r.ok ? r.json() : { videos:[] }; })
+      .then(function(d){ videos = (d && d.videos) ? d.videos : []; render(); })
+      .catch(function(){ videos = []; render(); });
+  }
+
+  function showApp(){ lock.classList.add('hidden'); app.classList.remove('hidden'); loadData(); }
+
+  document.getElementById('lock-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var pc = document.getElementById('passcode').value.trim();
+    if (!pc) return;
+    // verify the passcode against the server before entering
+    var ls = document.getElementById('lock-status'); ls.textContent = 'Checking…';
+    fetch('/api/save-videos', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ key: pc, verify: true }) })
+      .then(function(r){ return r.status; })
+      .then(function(s){
+        if (s === 401){ ls.textContent = 'Incorrect passcode.'; return; }
+        if (s === 500){ ls.textContent = 'Server not set up yet (missing passcode/token).'; return; }
+        // 200 (verify ok) or any non-auth error means the key was accepted
+        setKey(pc); ls.textContent = ''; showApp();
+      })
+      .catch(function(){ ls.textContent = 'Network error — try again.'; });
+  });
+
+  // auto-enter if a passcode is already stored this session
+  if (getKey()) showApp();
+})();
+</script>
 </body>
 </html>
