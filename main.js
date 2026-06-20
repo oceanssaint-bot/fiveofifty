@@ -326,11 +326,13 @@
         var note = success.querySelector('[data-fallback]');
         var link = success.querySelector('[data-mailto]');
         if (link) {
+          var fv = function (n) { return (form[n] && form[n].value) ? form[n].value.trim() : ''; };
+          var name = fv('name') || (fv('first') + ' ' + fv('last')).trim();
           var body =
-            'Name: ' + (form.first.value || '') + ' ' + (form.last.value || '') + '\n' +
-            'Email: ' + (form.email.value || '') + '\n\n' + (form.message.value || '');
+            'Name: ' + name + '\n' +
+            'Email: ' + fv('email') + '\n\n' + fv('message');
           link.href = 'mailto:fiveofiftystudios@gmail.com'
-            + '?subject=' + encodeURIComponent(form.subject.value || 'Project enquiry')
+            + '?subject=' + encodeURIComponent(fv('subject') || ('Project enquiry' + (name ? ' — ' + name : '')))
             + '&body=' + encodeURIComponent(body);
         }
         if (note) note.style.display = 'block';
@@ -435,7 +437,8 @@
   function initWork() {
     var grid = document.getElementById('videos-grid');
     var timeline = document.querySelector('[data-work-timeline]');
-    if (!grid && !timeline) return;
+    var featured = document.querySelector('[data-featured-project]');
+    if (!grid && !timeline && !featured) return;
 
     // resolve data path relative to site root (admin/ pages live one level down)
     var dataUrl = 'data/videos.json';
@@ -446,12 +449,14 @@
         var items = (data && data.videos ? data.videos : []).map(parseEntry).filter(Boolean);
         if (grid) { renderGrid(grid, items); observeReveal(grid.querySelectorAll('.tile'), 55); }
         if (timeline) { renderTimeline(timeline, items); observeReveal(timeline.querySelectorAll('.tl-row'), 70); }
+        if (featured) { renderFeatured(featured, items); observeReveal(featured.querySelectorAll('.feat-card'), 0); }
         if (items.length) ensureVideoModal();
         backfillVimeoThumbs(items);
       })
       .catch(function () {
         if (grid) grid.innerHTML = '<p class="work-empty">Work is loading shortly.</p>';
         if (timeline) timeline.innerHTML = '';
+        if (featured) featured.innerHTML = '';
       });
   }
 
@@ -531,6 +536,27 @@
             '<span class="tl-go">View project →</span></span>' +
         '</a></li>';
     }).join('');
+  }
+
+  // Contact page: one highlighted project card that closes the page on social proof.
+  function renderFeatured(el, items) {
+    if (!items.length) { el.innerHTML = ''; return; }
+    var pick = items.filter(function (i) { return i.featured; });
+    var it = (pick.length ? pick : items)[0];
+    el.innerHTML =
+      '<a class="feat-card tile-link" href="' + esc(it.watch) + '" data-video="' + esc(it.embed) +
+        '" data-title="' + esc(it.title) + '" aria-label="Play ' + esc(it.title) + '">' +
+        '<span class="feat-media">' + thumbImg(it, 'tile-media') +
+          '<span class="feat-play">' + PLAY_ICON + '</span></span>' +
+        '<span class="feat-info">' +
+          '<span class="feat-meta">' +
+            (it.year ? '<span>' + esc(it.year) + '</span>' : '') +
+            (it.category ? '<span class="feat-tag">' + esc(it.category) + '</span>' : '') +
+          '</span>' +
+          '<span class="feat-title">' + esc(it.title) + '</span>' +
+          (it.description ? '<span class="feat-desc">' + esc(it.description) + '</span>' : '') +
+        '</span>' +
+      '</a>';
   }
 
   // Vimeo gives no thumbnail from the URL alone — fetch it from the public oEmbed endpoint.

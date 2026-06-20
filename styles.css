@@ -318,6 +318,85 @@ body.menu-open .mobile-menu{transform:translateY(0);visibility:visible;}
 .section--studio .form-success p{color:var(--studio-dim);}
 
 /* ============================================================================
+   CONTACT PAGE — editorial "Let's work together" layout (Rethink structure)
+   ============================================================================ */
+/* Hero: oversized statement headline + scroll cue */
+.contact-hero{padding-top:clamp(72px,15vh,180px);padding-bottom:var(--s-8);}
+.contact-hero .ch-eyebrow{display:block;font-family:var(--font-mono);font-size:12px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--orange);margin-bottom:var(--s-5);}
+.contact-hero .ch-eyebrow .dim{color:var(--fg3);}
+.contact-hero .ch-title{font-family:var(--font-display);font-size:clamp(60px,12.5vw,200px);line-height:.84;
+  letter-spacing:.01em;text-transform:uppercase;color:var(--ink);text-wrap:balance;}
+.contact-hero .ch-title .o{color:var(--orange);}
+.ch-scroll{display:inline-flex;align-items:center;gap:12px;margin-top:var(--s-7);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg3);}
+.ch-scroll .ch-arrow{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:var(--r-pill);
+  border:1px solid var(--ink);color:var(--ink);transition:background var(--dur-fast),color var(--dur-fast);}
+.ch-scroll:hover .ch-arrow{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+/* Section header: (Eyebrow) + 2-digit index, used across 01/02/03 */
+.sec-head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s-5);
+  border-top:1px solid var(--line);padding-top:var(--s-5);margin-bottom:var(--s-7);}
+.sec-head .sec-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--orange);}
+.sec-head .sec-index{font-family:var(--font-display);font-size:clamp(34px,5vw,72px);line-height:.8;
+  letter-spacing:.02em;color:var(--n200);}
+.section--studio .sec-head{border-top-color:var(--studio-line);}
+.section--studio .sec-head .sec-index{color:var(--studio-line);}
+
+/* 01 — lede: intro copy + direct contact links | large editorial visual */
+.contact-lede{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,90px);align-items:center;}
+.contact-lede .lede-p{font-size:18px;line-height:1.8;color:var(--fg2);max-width:46ch;margin-bottom:var(--s-7);}
+.contact-direct{display:flex;flex-direction:column;gap:var(--s-5);}
+.contact-direct .cd-k{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg3);margin-bottom:8px;}
+.contact-direct a.cd-v{font-family:var(--font-display);font-size:clamp(24px,2.8vw,38px);letter-spacing:.02em;
+  text-transform:uppercase;color:var(--ink);line-height:1.04;transition:color var(--dur-fast);}
+.contact-direct a.cd-v:hover{color:var(--orange);}
+.contact-visual{position:relative;overflow:hidden;border-radius:var(--r-md);aspect-ratio:4/5;background:var(--n100);}
+.contact-visual video,.contact-visual img{width:100%;height:100%;object-fit:cover;}
+.contact-visual::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(10,10,10,.06);border-radius:var(--r-md);}
+
+/* "Email Us" decorative repeated heading (bare marquee, no band) */
+.marquee--bare{background:transparent;color:var(--ink);border:none;padding:var(--s-3) 0;}
+.marquee--bare .m-word{font-size:clamp(40px,8vw,120px);}
+.marquee--bare .m-star{color:var(--orange);}
+
+/* Form supporting line + required note */
+.form-lead{font-size:17px;line-height:1.7;color:var(--fg2);max-width:52ch;margin-bottom:var(--s-6);}
+.form-note{display:flex;align-items:center;gap:10px;margin-top:var(--s-5);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--fg3);}
+.form-note svg{width:15px;height:15px;flex-shrink:0;color:var(--orange);}
+
+/* 03 — featured project card */
+.feat-card{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;}
+.feat-media{position:relative;display:block;overflow:hidden;border-radius:var(--r-md);aspect-ratio:16/10;background:var(--n100);}
+.feat-media .tile-media{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-slow) var(--ease-out);}
+.feat-card:hover .feat-media .tile-media{transform:scale(1.04);}
+.feat-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:var(--r-pill);
+  background:rgba(10,10,10,.55);color:#fff;display:grid;place-items:center;transition:background var(--dur-fast),transform var(--dur-fast);}
+.feat-play svg{width:24px;height:24px;margin-left:3px;}
+.feat-card:hover .feat-play{background:var(--orange);transform:translate(-50%,-50%) scale(1.08);}
+.feat-meta{display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:var(--s-3);}
+.feat-meta .feat-tag{color:var(--orange);border:1px solid var(--n200);border-radius:var(--r-pill);padding:4px 12px;}
+.feat-title{display:block;font-family:var(--font-display);font-size:clamp(30px,4vw,56px);line-height:.96;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);margin-bottom:var(--s-3);}
+.feat-desc{display:block;font-size:15px;line-height:1.7;color:var(--fg2);max-width:42ch;}
+.feat-foot{margin-top:var(--s-7);}
+
+/* back-to-top circular button (footer) */
+.site-footer .to-top{display:grid;place-items:center;width:52px;height:52px;border-radius:var(--r-pill);
+  border:1px solid var(--line);color:var(--ink);margin:0 auto var(--s-6);
+  transition:background var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast);}
+.site-footer .to-top:hover{background:var(--orange);border-color:var(--orange);color:#fff;}
+.site-footer .to-top svg{width:20px;height:20px;}
+
+@media (max-width:760px){
+  .contact-lede{grid-template-columns:1fr;gap:var(--s-7);}
+  .contact-visual{aspect-ratio:4/3;}
+  .feat-card{grid-template-columns:1fr;gap:var(--s-5);}
+  .sec-head .sec-index{font-size:40px;}
+}
+
+/* ============================================================================
    FOOTER
    ============================================================================ */
 .site-footer{border-top:1px solid var(--line);padding:var(--s-8) 0;text-align:center;}
