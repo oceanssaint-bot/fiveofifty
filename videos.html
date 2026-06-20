@@ -65,8 +65,14 @@
   </div>
 
   <section class="section--tight">
-    <!-- Tiles are rendered from data/videos.json by main.js (managed via /admin) -->
-    <div class="grid-uniform grid-bleed" id="videos-grid" aria-live="polite"></div>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-eyebrow">(Selected Work)</span>
+        <span class="sec-index">01</span>
+      </div>
+    </div>
+    <!-- Rows are rendered from data/videos.json by main.js (managed via /admin) -->
+    <ol class="work-index" data-work-index aria-live="polite"></ol>
   </section>
 </main>
 

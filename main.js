@@ -438,7 +438,8 @@
     var grid = document.getElementById('videos-grid');
     var timeline = document.querySelector('[data-work-timeline]');
     var featured = document.querySelector('[data-featured-project]');
-    if (!grid && !timeline && !featured) return;
+    var indexList = document.querySelector('[data-work-index]');
+    if (!grid && !timeline && !featured && !indexList) return;
 
     // resolve data path relative to site root (admin/ pages live one level down)
     var dataUrl = 'data/videos.json';
@@ -450,6 +451,7 @@
         if (grid) { renderGrid(grid, items); observeReveal(grid.querySelectorAll('.tile'), 55); }
         if (timeline) { renderTimeline(timeline, items); observeReveal(timeline.querySelectorAll('.tl-row'), 70); }
         if (featured) { renderFeatured(featured, items); observeReveal(featured.querySelectorAll('.feat-card'), 0); }
+        if (indexList) { renderEditorial(indexList, items); observeReveal(indexList.querySelectorAll('.wi-row'), 80); }
         if (items.length) ensureVideoModal();
         backfillVimeoThumbs(items);
       })
@@ -457,6 +459,7 @@
         if (grid) grid.innerHTML = '<p class="work-empty">Work is loading shortly.</p>';
         if (timeline) timeline.innerHTML = '';
         if (featured) featured.innerHTML = '';
+        if (indexList) indexList.innerHTML = '<li class="work-empty">Work is loading shortly.</li>';
       });
   }
 
@@ -557,6 +560,30 @@
           (it.description ? '<span class="feat-desc">' + esc(it.description) + '</span>' : '') +
         '</span>' +
       '</a>';
+  }
+
+  // Work page: editorial index — numbered, alternating media|info rows.
+  function renderEditorial(ol, items) {
+    if (!items.length) { ol.innerHTML = '<li class="work-empty">No work yet.</li>'; return; }
+    ol.innerHTML = items.map(function (it, i) {
+      var n = String(i + 1).padStart(2, '0');
+      return '<li class="wi-row">' +
+        '<a class="wi-card tile-link" href="' + esc(it.watch) + '" data-video="' + esc(it.embed) +
+          '" data-title="' + esc(it.title) + '" aria-label="Play ' + esc(it.title) + '">' +
+          '<span class="wi-media">' + thumbImg(it, 'tile-media') +
+            '<span class="wi-play">' + PLAY_ICON + '</span></span>' +
+          '<span class="wi-body">' +
+            '<span class="wi-num" aria-hidden="true">' + n + '</span>' +
+            '<span class="wi-meta">' +
+              (it.year ? '<span>' + esc(it.year) + '</span>' : '') +
+              (it.category ? '<span class="wi-tag">' + esc(it.category) + '</span>' : '') +
+            '</span>' +
+            '<span class="wi-title">' + esc(it.title) + '</span>' +
+            (it.description ? '<span class="wi-desc">' + esc(it.description) + '</span>' : '') +
+            '<span class="wi-go">Watch project <span class="arrow" aria-hidden="true">→</span></span>' +
+          '</span>' +
+        '</a></li>';
+    }).join('');
   }
 
   // Vimeo gives no thumbnail from the URL alone — fetch it from the public oEmbed endpoint.
