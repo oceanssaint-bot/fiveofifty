@@ -13,6 +13,7 @@
     initBrandIntro();
     initStickyHeader();
     initHeroVideo();
+    initKinetic();
     initReveal();
     initWork();
     initLazyVideo();
@@ -75,6 +76,47 @@
     document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
   }
 
+  /* --- Kinetic type: display headings rise word-by-word out of a mask ------ */
+  function initKinetic() {
+    var targets = [].slice.call(document.querySelectorAll('[data-kinetic], .sec-title, .page-title, .reel-word'));
+    if (!targets.length || prefersReduced || !('IntersectionObserver' in window)) return; // leave text visible
+
+    targets.forEach(splitWords);
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('kinetic-in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+    targets.forEach(function (el) {
+      var top = el.getBoundingClientRect().top;
+      if (top < (window.innerHeight || 0) * 0.9) el.classList.add('kinetic-in'); // already on screen
+      else io.observe(el);
+    });
+  }
+
+  // Wrap each word of a plain-text element in a clipping mask + sliding inner span.
+  // Elements that contain child markup are left untouched (just tagged) to stay safe.
+  function splitWords(el) {
+    if (el.dataset.kineticReady) return;
+    el.dataset.kineticReady = '1';
+    for (var n = el.firstChild; n; n = n.nextSibling) {
+      if (n.nodeType === 1) return; // has element children — don't rewrite its DOM
+    }
+    var words = el.textContent.trim().split(/\s+/);
+    el.textContent = '';
+    words.forEach(function (w, i) {
+      var word = document.createElement('span'); word.className = 'k-word';
+      var inner = document.createElement('span'); inner.className = 'k-inner';
+      inner.textContent = w;
+      inner.style.transitionDelay = (i * 60) + 'ms';
+      word.appendChild(inner);
+      el.appendChild(word);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+  }
+
   /* --- Scroll reveal: fade + rise elements as they enter the viewport ------ */
   var revealIO = null;
   function initReveal() {
@@ -85,7 +127,8 @@
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
-    observeReveal(document.querySelectorAll('.sec-title, .manifesto, .showreel .reel-link, .page-kicker, .page-title, .tl-foot'));
+    // Display headings (.sec-title/.page-title/.reel-word) are handled by initKinetic.
+    observeReveal(document.querySelectorAll('.manifesto, .showreel .reel-play, .page-kicker, .tl-foot'));
     observeReveal(document.querySelectorAll('.services .svc'), 90);
     observeReveal(document.querySelectorAll('.team-member'), 90);
     observeReveal(document.querySelectorAll('.contact-grid > *'), 90);
